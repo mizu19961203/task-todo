@@ -1,12 +1,12 @@
 <h1>タスク編集</h1>
 <%= form_for(@task) do |f| %>
-  <div><%= f.label :title %></div>
+  <div><%= f.label :名称 %></div>
   <div><%= f.text_field :title %></div>
-  <div><%= f.label :description %></div>
+  <div><%= f.label :内容 %></div>
   <div><%= f.text_field :description %></div>
-  <div><%= f.label :start %></div>
+  <div><%= f.label :開始日 %></div>
   <div><%= f.date_select :date_start %></div>
-  <div><%= f.label :fin %></div>
+  <div><%= f.label :終了日 %></div>
   <div><%= f.date_select :date_fin %></div>
   <div><%= f.submit %></div>
 <% end %>

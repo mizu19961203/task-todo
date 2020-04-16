@@ -1,0 +1,25 @@
+<h1>詳細</h1>
+
+
+<div>
+	名称 : <%= link_to @task.title %>
+</div>
+<div>
+	内容 : <%= link_to @task.description %>
+</div>
+<div>
+	開始日 : <%= link_to @task.date_start %>
+</div>
+<div>
+	終了日 : <%= link_to @task.date_fin%>
+</div>
+<div>
+	<%= link_to '編集', edit_task_path %>
+</div>
+<div>
+	<%= link_to '削除', task_path, method: :delete %>
+</div>
+<div>
+	<%= link_to '戻る', tasks_path %>
+</div>
+
