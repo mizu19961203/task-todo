@@ -14,3 +14,30 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require jquery
+//= require moment
+//= require fullcalendar
+
+$(function(){
+	    $(document).on('turbolinks:load', function () {
+	        if ($('#calendar').length) {
+	            function taskCalendar() {
+					return $('#calendar').fullCalendar({});
+			    };
+			    function clearCalendar() {
+			        $('#calendar').html('');
+			    };
+
+			    $(document).on('turbolinks:load', function () {
+				    taskCalendar();
+				});
+
+				$(document).on('turbolinks:before-cache', clearCalendar);
+
+				$('#calendar').fullCalendar({
+				    tasks: '/tasks.json'
+				});
+		}
+    });
+});
+
