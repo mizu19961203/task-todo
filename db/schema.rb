@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_152706) do
+ActiveRecord::Schema.define(version: 2020_04_16_092424) do
+
+  create_table "places", force: :cascade do |t|
+    t.text "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.string "title"
@@ -19,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_152706) do
     t.text "description"
     t.date "date_start"
     t.date "date_fin"
+    t.integer "place_id"
   end
 
 end
