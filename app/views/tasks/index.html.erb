@@ -1,7 +1,11 @@
 <h1>タスク一覧</h1>
+<h2><%= link_to 'タスク追加', new_task_path %></h2>
+
+
 <table>
   <thead>
     <tr>
+      <td></td>
       <td>タスク名</td>
       <td>内容</td>
       <td>開始</td>
@@ -13,6 +17,7 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
+        <td><%= task.id %></td>
         <td><%= task.title %></td>
         <td><%= task.description %></td>
         <td><%= task.date_start %></td>
@@ -24,7 +29,7 @@
   </tbody>
 </table>
 
-<%= link_to '追加', new_task_path %>
+
 
 <div id="calendar"></div>
 

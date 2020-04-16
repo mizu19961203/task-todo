@@ -5,9 +5,9 @@
   <div><%= f.label :description %></div>
   <div><%= f.text_field :description %></div>
   <div><%= f.label :start %></div>
-  <div><%= f.text_field :date_start %></div>
+  <div><%= f.date_select :date_start %></div>
   <div><%= f.label :fin %></div>
-  <div><%= f.text_field :date_fin %></div>
+  <div><%= f.date_select :date_fin %></div>
   <div><%= f.submit %></div>
 <% end %>
 <%= link_to '戻る', tasks_path %>
