@@ -1,13 +1,23 @@
 <h1>タスク編集</h1>
-<%= form_for(@task) do |f| %>
+<%= form_with model: @task, url: task_path, method: :patch do |f| %>
+
   <div><%= f.label :名称 %></div>
   <div><%= f.text_field :title %></div>
+
   <div><%= f.label :内容 %></div>
   <div><%= f.text_field :description %></div>
+
   <div><%= f.label :開始日 %></div>
   <div><%= f.date_select :date_start %></div>
+
   <div><%= f.label :終了日 %></div>
   <div><%= f.date_select :date_fin %></div>
+
+  <%= f.fields_for :places do |place_fields| %>
+	    <div><%= place_fields.label :場所 %></div>
+	    <div><%= place_fields.text_field :address, placeholder: "住所" %></div>
+  <% end %>
+
   <div><%= f.submit %></div>
 <% end %>
 <%= link_to '戻る', tasks_path %>
