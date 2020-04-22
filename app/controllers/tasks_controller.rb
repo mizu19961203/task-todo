@@ -5,6 +5,7 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    @task.places.build
   end
 
   def create
@@ -36,12 +37,14 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
+
   private
     def task_params
       params.require(:task).permit(:title,
                                    :description,
                                    :date_start,
-                                   :date_fin
+                                   :date_fin,
+                                   places_attributes: [:address, :latitude, :longitude]
                                   )
     end
   end

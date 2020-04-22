@@ -9,7 +9,7 @@
       <td>名称</td>
       <td>内容</td>
       <td>開始日</td>
-      <td>場所</td>
+      <td>場所・住所</td>
       <td></td>
     </tr>
   </thead>
@@ -20,7 +20,11 @@
         <td><%= task.title %></td>
         <td><%= task.description %></td>
         <td><%= task.date_start %></td>
-        <td></td>
+        <td>
+          <% task.places.each do |place| %>
+            <%= place.address %>
+          <% end %>
+        </td>
         <td><%= link_to '詳細', task_path(task) %></td>
         <td><%= link_to '編集', edit_task_path(task) %></td>
         <td><%= link_to '削除', task_path(task), method: :delete %></td>
@@ -29,27 +33,67 @@
   </tbody>
 </table>
 
-
-
-<div id="calendar"></div>
-
 <h2>gmap</h2>
-<div id='map'></div>
+
+<!-- 地名入力用のinputを追加 -->
+<input id="address" type="textbox" value="Tokyo, shibuya">
+
+<!-- buttonをクリックしたらcodeAddressを実行　-->
+<input type="button" value="検索" onclick="codeAddress()">
+<div id='map'>
+</div>
 
 <style>
 #map{
-  height: 400px;
+  height: 300px;
+  width: 300px;
 }
 </style>
 
+
 <script>
+/*
+mapを関数の外で定義(codeAddressでも使うため)
+geocoderを用意
+*/
+
+let map
+let geocoder
+
 function initMap(){
-  let map = new google.maps.Map(document.getElementById('map'), {
-  center: {lat: -34.397, lng: 150.644},
-  zoom: 8
-  });
-}
+      // geocoderを初期化
+      geocoder = new google.maps.Geocoder()
+
+      map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 35.661971, lng: 139.703795},
+      zoom: 12
+      });
+    }
+    function codeAddress(){
+      // 入力を取得
+      let inputAddress = document.getElementById('address').value;
+
+      // geocodingしたあとmapを移動
+      geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+        if (status == 'OK') {
+    　　　　　　　　　　　　// map.setCenterで地図が移動
+          map.setCenter(results[0].geometry.location);
+
+    　　　　　　　　　　　　// google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
+          var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+          });
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+    }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmgeXFiJ5oULf45lBH7sLLnHy9pfJ-Y-o&callback=initMap" async defer>
+
+<script src="https://maps.googleapis.com/maps/api/js?key= <%=ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer>
 </script>
+
+<div id="calendar"></div>
+
 

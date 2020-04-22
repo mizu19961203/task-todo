@@ -1,24 +1,66 @@
 <h1>詳細</h1>
 
+<div>
+	名称 : <%= @task.title %>
+</div>
 
 <div>
-	名称 : <%= link_to @task.title %>
+	内容 : <%= @task.description %>
 </div>
+
 <div>
-	内容 : <%= link_to @task.description %>
+	開始日 : <%= @task.date_start %>
 </div>
+
 <div>
-	開始日 : <%= link_to @task.date_start %>
+	終了日 : <%= @task.date_fin%>
 </div>
+
 <div>
-	終了日 : <%= link_to @task.date_fin%>
+	住所 :
+	<% @task.places.each do |place| %>
+            <%= place.address %>
+    <% end %>
 </div>
+
+
+
+<h2>
+<% @task.places.each do |place| %>
+
+<div id="map" style="width: 300px; height: 300px;"></div>
+
+  <script type="text/javascript">
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: { scrollwheel: false }, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers([
+        {
+          "lat": <%= place.latitude %>,
+          "lng": <%= place.longitude %>,
+      "infowindow": '<p><%= place.address %></p><p><%= place.address %></p><p><%= link_to "Googleマップで見る" ,"https://maps.google.co.jp/maps?q=loc:#{place.latitude},#{place.longitude}&iwloc=J",target: "_blank" %></p>'
+        }
+      ]);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      handler.getMap().setZoom(15);
+    });
+  </script>
+
+
+<% end %>
+</h2>
+
+
+
+
 <div>
 	<%= link_to '編集', edit_task_path %>
 </div>
+
 <div>
 	<%= link_to '削除', task_path, method: :delete %>
 </div>
+
 <div>
 	<%= link_to '戻る', tasks_path %>
 </div>
