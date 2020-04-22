@@ -17,16 +17,12 @@
 </div>
 
 <div>
-	住所 :
-	<% @task.places.each do |place| %>
-            <%= place.address %>
-    <% end %>
+	住所 : <%= @task.address %>
 </div>
 
 
 
 <h2>
-<% @task.places.each do |place| %>
 
 <div id="map" style="width: 300px; height: 300px;"></div>
 
@@ -35,9 +31,9 @@
     handler.buildMap({ provider: { scrollwheel: false }, internal: {id: 'map'}}, function(){
       markers = handler.addMarkers([
         {
-          "lat": <%= place.latitude %>,
-          "lng": <%= place.longitude %>,
-      "infowindow": '<p><%= place.address %></p><p><%= place.address %></p><p><%= link_to "Googleマップで見る" ,"https://maps.google.co.jp/maps?q=loc:#{place.latitude},#{place.longitude}&iwloc=J",target: "_blank" %></p>'
+          "lat": <%= @task.latitude %>,
+          "lng": <%= @task.longitude %>,
+      "infowindow": '<p><%= @task.address %></p><p><%= @task.address %></p><p><%= link_to "Googleマップで見る" ,"https://maps.google.co.jp/maps?q=loc:#{@task.latitude},#{@task.longitude}&iwloc=J",target: "_blank" %></p>'
         }
       ]);
       handler.bounds.extendWith(markers);
@@ -47,7 +43,6 @@
   </script>
 
 
-<% end %>
 </h2>
 
 

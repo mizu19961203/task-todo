@@ -20,11 +20,7 @@
         <td><%= task.title %></td>
         <td><%= task.description %></td>
         <td><%= task.date_start %></td>
-        <td>
-          <% task.places.each do |place| %>
-            <%= place.address %>
-          <% end %>
-        </td>
+        <td><%= task.address %></td>
         <td><%= link_to '詳細', task_path(task) %></td>
         <td><%= link_to '編集', edit_task_path(task) %></td>
         <td><%= link_to '削除', task_path(task), method: :delete %></td>

@@ -13,10 +13,8 @@
   <div><%= f.label :終了日 %></div>
   <div><%= f.date_select :date_fin %></div>
 
-  <%= f.fields_for :places do |place_fields| %>
-	    <div><%= place_fields.label :場所 %></div>
-	    <div><%= place_fields.text_field :address, placeholder: "住所" %></div>
-  <% end %>
+  <div><%= f.label :場所 %></div>
+	<div><%= f.text_field :address, placeholder: "住所" %></div>
 
   <div><%= f.submit %></div>
 <% end %>

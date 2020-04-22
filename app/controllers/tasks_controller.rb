@@ -5,7 +5,6 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
-    @task.places.build
   end
 
   def create
@@ -44,7 +43,9 @@ class TasksController < ApplicationController
                                    :description,
                                    :date_start,
                                    :date_fin,
-                                   places_attributes: [:address, :latitude, :longitude]
+                                   :address,
+                                   :latitude,
+                                   :longitude
                                   )
     end
   end
