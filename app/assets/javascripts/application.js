@@ -51,6 +51,14 @@ $(function(){
 	                    center: 'title',
 	                    right: 'today prev,next'
 	                },
+	                eventDataTransform: function (event){
+						console.log(event);
+						if (event.end){
+							var timestamp = new Date(Date.parse(event.end)).getTime();
+							event.end = moment(new Date(timestamp + 60*60*24*1000)).format('YYYY-MM-DD');
+						}
+						return event;
+					},
 	                //終了時刻がないイベントの表示間隔
 	                defaultTimedEventDuration: '03:00:00',
 	                buttonText: {
@@ -64,11 +72,11 @@ $(function(){
 	                    day: '日'
 	                },
 	                // Drag & Drop & Resize
-	                editable: true,
+	                editable: false,
 	                //イベントの時間表示を２４時間に
 	                timeFormat: "HH:mm",
 	                //イベントの色を変える
-	                eventColor: '#87cefa',
+	                eventColor: 'orange',
 	                //イベントの文字色を変える
 	                eventTextColor: '#000000',
 	                eventRender: function(event, element) {
@@ -79,4 +87,3 @@ $(function(){
 		}
     });
 });
-
